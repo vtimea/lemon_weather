@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:lemonweather/model/Weather.dart';
+import 'package:lemonweather/model/weather.dart';
 
-import 'HttpException.dart';
+import 'http_exception.dart';
 
 class WeatherApiClient {
   static const baseUrl = 'http://api.openweathermap.org';
