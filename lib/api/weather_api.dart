@@ -16,7 +16,8 @@ class WeatherApiClient {
         assert(httpClient != null);
 
   Future<Weather> getCurrentWeather(String cityName) async {
-    final url = '$baseUrl/data/2.5/weather?q=$cityName&appid=$apiKey';
+    final url =
+        '$baseUrl/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric';
     final res = await this.httpClient.get(url);
     if (res.statusCode != 200) {
       throw HTTPException(res.statusCode, "unable to fetch weather data");
