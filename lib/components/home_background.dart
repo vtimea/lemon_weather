@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lemonweather/model/time_state.dart';
+import 'package:lemonweather/model/current_style.dart';
 
 class HomeBackground extends StatelessWidget {
   static const String base = 'graphics';
