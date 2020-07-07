@@ -26,6 +26,6 @@ class HomeBackground extends StatelessWidget {
   }
 
   String getCurrentAsset() {
-    return TimeState.getTimeState(DateTime.now()).background;
+    return CurrentStyle.getTimeState(DateTime.now()).background;
   }
 }

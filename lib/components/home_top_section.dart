@@ -16,7 +16,7 @@ class HomeCurrentWeather extends StatefulWidget {
 class _CurrentWeatherState extends State<HomeCurrentWeather> {
   static const String currentCity = 'Budapest';
   Weather currentWeather;
-  TimeState state;
+  CurrentStyle state;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,13 @@ class _CurrentWeatherState extends State<HomeCurrentWeather> {
           .then((value) => currentWeather = value)
           .whenComplete(() => setState(() {}));
     }
-    state = TimeState.getTimeState(DateTime.now());
+    state = CurrentStyle.getTimeState(DateTime.now());
     return DefaultTextStyle(
         style: TextStyle(shadows: <Shadow>[
           Shadow(
               offset: Offset(1.5, 1.5),
               blurRadius: 5,
-              color: Color.fromARGB(150, 120, 217, 255))
+              color: state.color.withAlpha(150))
         ], color: Colors.white, decoration: TextDecoration.none),
         child: Padding(
             padding: EdgeInsets.only(
@@ -58,8 +58,14 @@ class _CurrentWeatherState extends State<HomeCurrentWeather> {
             ])));
   }
 
+  Future<Weather> loadWeather() {
+    final weatherApi = WeatherApiClient(
+        httpClient: http.Client(), apiKey: ApiKey.OPEN_WEATHER_API_KEY);
+    return weatherApi.getCurrentWeather(currentCity);
+  }
+
   String getGreeting() {
-    return TimeState.getTimeState(DateTime.now()).greeting;
+    return CurrentStyle.getTimeState(DateTime.now()).greeting;
   }
 
   String getTemperature() {
@@ -82,12 +88,6 @@ class _CurrentWeatherState extends State<HomeCurrentWeather> {
     }
     return 0;
   }
-
-  Future<Weather> loadWeather() {
-    final weatherApi = WeatherApiClient(
-        httpClient: http.Client(), apiKey: ApiKey.OPEN_WEATHER_API_KEY);
-    return weatherApi.getCurrentWeather(currentCity);
-  }
 }
 
 class TemperatureRow extends StatelessWidget {
@@ -97,7 +97,7 @@ class TemperatureRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TimeState state = TimeState.getTimeState(DateTime.now());
+    CurrentStyle state = CurrentStyle.getTimeState(DateTime.now());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +107,7 @@ class TemperatureRow extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.white60, Colors.white]),
+              colors: [Colors.white, Colors.white]),
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 100),
         ),
         GradientText(
@@ -115,7 +115,7 @@ class TemperatureRow extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.white60, Colors.white]),
+              colors: [Colors.white, Colors.white]),
           style: new TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         )
       ],

@@ -1,21 +1,28 @@
-class TimeState {
+import 'dart:ui';
+
+class CurrentStyle {
   String greeting;
   String background;
+  Color color;
 
-  TimeState(this.greeting, this.background);
+  CurrentStyle(this.greeting, this.background, this.color);
 
-  static TimeState getTimeState(DateTime dateTime) {
+  static CurrentStyle getTimeState(DateTime dateTime) {
     int nowHour = dateTime.hour;
     if (nowHour >= _NIGHT_END || nowHour <= _NIGHT_START) {
-      return TimeState(_greetings[_KEY_NIGHT], _backgrounds[_KEY_NIGHT]);
+      return CurrentStyle(_greetings[_KEY_NIGHT], _backgrounds[_KEY_NIGHT],
+          _colors[_KEY_NIGHT]);
     }
     if (nowHour >= _SUNRISE_START && nowHour <= _SUNRISE_END) {
-      return TimeState(_greetings[_KEY_MORNING], _backgrounds[_KEY_MORNING]);
+      return CurrentStyle(_greetings[_KEY_MORNING], _backgrounds[_KEY_MORNING],
+          _colors[_KEY_MORNING]);
     }
     if (nowHour >= _DAY_START && nowHour <= _DAY_END) {
-      return TimeState(_greetings[_KEY_DAY], _backgrounds[_KEY_DAY]);
+      return CurrentStyle(
+          _greetings[_KEY_DAY], _backgrounds[_KEY_DAY], _colors[_KEY_DAY]);
     }
-    return TimeState(_greetings[_KEY_EVENING], _backgrounds[_KEY_EVENING]);
+    return CurrentStyle(_greetings[_KEY_EVENING], _backgrounds[_KEY_EVENING],
+        _colors[_KEY_EVENING]);
   }
 
   static const String _KEY_MORNING = 'morning';
@@ -43,5 +50,12 @@ class TimeState {
     _KEY_DAY: '$_base/background_day.jpg',
     _KEY_EVENING: '$_base/background_sunset.jpg',
     _KEY_NIGHT: '$_base/background_night.jpg'
+  };
+
+  static const Map<String, Color> _colors = {
+    _KEY_MORNING: Color.fromARGB(255, 191, 103, 90),
+    _KEY_DAY: Color.fromARGB(255, 120, 217, 255),
+    _KEY_EVENING: Color.fromARGB(255, 240, 130, 86),
+    _KEY_NIGHT: Color.fromARGB(255, 25, 195, 255),
   };
 }
