@@ -44,12 +44,12 @@ class CurrentStyle {
     _KEY_NIGHT: 'Good night!'
   };
 
-  static const String _base = 'graphics';
+  static const String base = 'graphics';
   static const Map<String, String> _backgrounds = {
-    _KEY_MORNING: '$_base/background_sunrise.jpg',
-    _KEY_DAY: '$_base/background_day.jpg',
-    _KEY_EVENING: '$_base/background_sunset.jpg',
-    _KEY_NIGHT: '$_base/background_night.jpg'
+    _KEY_MORNING: '$base/background_sunrise.jpg',
+    _KEY_DAY: '$base/background_day.jpg',
+    _KEY_EVENING: '$base/background_sunset.jpg',
+    _KEY_NIGHT: '$base/background_night.jpg'
   };
 
   static const Map<String, Color> _colors = {

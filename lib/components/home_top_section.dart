@@ -29,8 +29,8 @@ class _CurrentWeatherState extends State<HomeCurrentWeather> {
     return DefaultTextStyle(
         style: TextStyle(shadows: <Shadow>[
           Shadow(
-              offset: Offset(1.5, 1.5),
-              blurRadius: 5,
+              offset: Offset(0.0, 0.0),
+              blurRadius: 10,
               color: state.color.withAlpha(150))
         ], color: Colors.white, decoration: TextDecoration.none),
         child: Padding(
@@ -49,6 +49,7 @@ class _CurrentWeatherState extends State<HomeCurrentWeather> {
                   )),
               SizedBox(height: 70),
               TemperatureRow(getTemperature(), getWeatherId()),
+              SizedBox(height: 15),
               Text(
                 currentCity,
                 style: new TextStyle(fontSize: 25),
@@ -119,7 +120,8 @@ class TemperatureRow extends StatelessWidget {
                         width: 40,
                         alignment: Alignment.center,
                         image: AssetImage(
-                            'graphics/${Weather.getWeatherIcon(weatherId)}'),
+                            '${CurrentStyle.base}/${Weather.getWeatherIcon(
+                                weatherId)}'),
                         color: Colors.white))),
             GradientText(
               temp,
